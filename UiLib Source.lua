@@ -104,7 +104,7 @@ function UILibrary:CreateLoginMenu()
     enterButton.BorderSizePixel = 0
     enterButton.MouseButton1Click:Connect(function()
         local userInput = textBox.Text
-        if userInput == "password123" then
+        if userInput == password then
             print("Good :D")
             -- Здесь можно выполнить дополнительные действия при успешном вводе пароля
             local successLabel = Instance.new("TextLabel", menu)
@@ -145,7 +145,6 @@ function UILibrary:CreateLoginMenu()
     getKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     getKeyButton.BorderSizePixel = 0
     getKeyButton.MouseButton1Click:Connect(function()
-        local link = "https://example.com"
         setclipboard(link)
         print("Link copied to clipboard:", link)
         
