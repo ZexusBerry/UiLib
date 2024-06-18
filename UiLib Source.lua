@@ -17,6 +17,19 @@ function UILibrary:AnimateIn(frame)
     tween:Play()
 end
 
+function UILibrary:AnimateOut(frame)
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+    local tween = TweenService:Create(frame, tweenInfo, {
+        Size = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1
+    })
+    
+    tween:Play()
+    tween.Completed:Connect(function()
+        frame.Visible = false
+    end)
+end
+
 function UILibrary:CreateLoginMenu()
     local player = game.Players.LocalPlayer
     local playerGui = player:WaitForChild("PlayerGui")
@@ -25,7 +38,9 @@ function UILibrary:CreateLoginMenu()
     
     local menu = Instance.new("Frame")
     menu.Size = UDim2.new(0, 300, 0, 200)
-    menu.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    menu.Position = UDim2.new(0.5, 0, 0.5, 0)
+    menu.AnchorPoint = Vector2.new(0.5, 0.5)
+    menu.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     menu.BorderSizePixel = 0
     menu.Visible = true
     
@@ -34,6 +49,17 @@ function UILibrary:CreateLoginMenu()
     -- Добавим возможность перетаскивания меню
     local dragging = false
     local dragStart = nil
+    
+    local closeBtn = Instance.new("TextButton", menu)
+    closeBtn.Text = "X"
+    closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeBtn.Position = UDim2.new(1, -20, 0, 10)
+    closeBtn.Size = UDim2.new(0, 20, 0, 20)
+    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+    closeBtn.BorderSizePixel = 0
+    closeBtn.MouseButton1Click:Connect(function()
+        self:AnimateOut(menu)
+    end)
     
     menu.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -58,8 +84,8 @@ function UILibrary:CreateLoginMenu()
     
     local textBox = Instance.new("TextBox", menu)
     textBox.PlaceholderText = "Enter your password"
-    textBox.Size = UDim2.new(0.8, 0, 0, 50)
-    textBox.Position = UDim2.new(0.1, 0, 0.2, 0)
+    textBox.Size = UDim2.new(0.8, 0, 0, 30)
+    textBox.Position = UDim2.new(0.1, 0, 0.3, 0)
     textBox.TextScaled = true
     textBox.Font = Enum.Font.SourceSans
     textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -69,8 +95,8 @@ function UILibrary:CreateLoginMenu()
     
     local enterButton = Instance.new("TextButton", menu)
     enterButton.Text = "Enter"
-    enterButton.Size = UDim2.new(0.35, 0, 0, 50)
-    enterButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+    enterButton.Size = UDim2.new(0.35, 0, 0, 30)
+    enterButton.Position = UDim2.new(0.1, 0, 0.5, 0)
     enterButton.TextScaled = true
     enterButton.Font = Enum.Font.SourceSans
     enterButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -80,24 +106,25 @@ function UILibrary:CreateLoginMenu()
         local userInput = textBox.Text
         if userInput == "password123" then
             print("Good :D")
-            local SLabel = Instance.new("TextLabel", menu)
-            SLabel.Text = "SussessFully"
-            SLabel.Size = UDim2.new(1, 0, 0, 20)
-            SLabel.Position = UDim2.new(0, 0, 0.8, 0)
-            SLabel.TextScaled = true
-            SLabel.Font = Enum.Font.SourceSans
-            SLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-            SLabel.BackgroundTransparency = 1
-            SLabel.BorderSizePixel = 0
+            -- Здесь можно выполнить дополнительные действия при успешном вводе пароля
+            local successLabel = Instance.new("TextLabel", menu)
+            successLabel.Text = "Success! Access granted."
+            successLabel.Size = UDim2.new(1, 0, 0, 20)
+            successLabel.Position = UDim2.new(0, 0, 0.75, 0)
+            successLabel.TextScaled = true
+            successLabel.Font = Enum.Font.SourceSans
+            successLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+            successLabel.BackgroundTransparency = 1
+            successLabel.BorderSizePixel = 0
             wait(3)
-            errorLabel:Destroy()
+            successLabel:Destroy()
         else
             print("Incorrect password")
             -- Отображение сообщения об ошибке
             local errorLabel = Instance.new("TextLabel", menu)
             errorLabel.Text = "Incorrect Password"
             errorLabel.Size = UDim2.new(1, 0, 0, 20)
-            errorLabel.Position = UDim2.new(0, 0, 0.8, 0)
+            errorLabel.Position = UDim2.new(0, 0, 0.75, 0)
             errorLabel.TextScaled = true
             errorLabel.Font = Enum.Font.SourceSans
             errorLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
@@ -106,21 +133,6 @@ function UILibrary:CreateLoginMenu()
             wait(3)
             errorLabel:Destroy()
         end
-    end)
-    
-    local getKeyButton = Instance.new("TextButton", menu)
-    getKeyButton.Text = "Get Key"
-    getKeyButton.Size = UDim2.new(0.35, 0, 0, 50)
-    getKeyButton.Position = UDim2.new(0.55, 0, 0.4, 0)
-    getKeyButton.TextScaled = true
-    getKeyButton.Font = Enum.Font.SourceSans
-    getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    getKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    getKeyButton.BorderSizePixel = 0
-    getKeyButton.MouseButton1Click:Connect(function()
-        local link = "https://example.com"
-        setclipboard(link)
-        print("Link copied to clipboard:", link)
     end)
     
     menu.Parent = screenGui
