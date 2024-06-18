@@ -3,7 +3,7 @@
 -- GitHub: https://github.com/ZexusBerry
 
 -- Module
-local UILibrary = {}
+local Library = {}
 
 -- Styles
 UILibrary.Styles = {
@@ -154,4 +154,4 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     return dropDown
 end
 
-return UILibrary
+return Library
