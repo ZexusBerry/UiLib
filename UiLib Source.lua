@@ -22,7 +22,7 @@ function UILibrary:CreateLoginMenu()
     menu.Size = UDim2.new(0, 300, 0, 200)
     menu.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
     menu.BorderSizePixel = 0
-    menu.Visible = false
+    menu.Visible = true
     
     self:AnimateIn(menu)
     
@@ -50,6 +50,8 @@ function UILibrary:CreateLoginMenu()
         local userInput = textBox.Text
         if userInput == "password123" then
             print("Hello")
+        else
+            print("Incorrect password")
         end
     end)
     
