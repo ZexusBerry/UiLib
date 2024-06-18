@@ -22,7 +22,7 @@ function UILibrary:CreateLoginMenu()
     menu.Size = UDim2.new(0, 300, 0, 200)
     menu.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
     menu.BorderSizePixel = 0
-    menu.Visible = true
+    menu.Visible = false
     
     self:AnimateIn(menu)
     
