@@ -190,3 +190,4 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
 end
 
 return UILibrary
+
