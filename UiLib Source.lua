@@ -6,7 +6,7 @@
 local Library = {}
 
 -- Styles
-UILibrary.Styles = {
+Library.Styles = {
     Dark = {
         BackgroundColor = Color3.fromRGB(32, 32, 32),
         TextColor = Color3.fromRGB(255, 255, 255),
@@ -42,7 +42,7 @@ local function applyStyle(uiElement, style)
 end
 
 -- Create Menu
-function UILibrary:CreateMenu(styleName, title)
+function Library:CreateMenu(styleName, title)
     local style = self.Styles[styleName]
     local menu = Instance.new("Frame")
     menu.Size = UDim2.new(0, 300, 0, 400)
@@ -61,7 +61,7 @@ function UILibrary:CreateMenu(styleName, title)
 end
 
 -- Create Tab
-function UILibrary:CreateTab(menu, title)
+function Library:CreateTab(menu, title)
     local tab = Instance.new("Frame", menu)
     tab.Size = UDim2.new(1, 0, 0, 50)
     tab.Position = UDim2.new(0, 0, 0, 50)
@@ -70,47 +70,47 @@ function UILibrary:CreateTab(menu, title)
     tabButton.Text = title
     tabButton.Size = UDim2.new(1, 0, 1, 0)
     tabButton.TextScaled = true
-    applyStyle(tabButton, UILibrary.Styles.Grey)
+    applyStyle(tabButton, Library.Styles.Grey)
     
     return tab
 end
 
 -- Create Button
-function UILibrary:CreateButton(parent, title, onClick)
+function Library:CreateButton(parent, title, onClick)
     local button = Instance.new("TextButton", parent)
     button.Text = title
     button.Size = UDim2.new(1, 0, 0, 50)
     button.TextScaled = true
     button.MouseButton1Click:Connect(onClick)
-    applyStyle(button, UILibrary.Styles.Grey)
+    applyStyle(button, Library.Styles.Grey)
     
     return button
 end
 
 -- Create Label
-function UILibrary:CreateLabel(parent, text)
+function Library:CreateLabel(parent, text)
     local label = Instance.new("TextLabel", parent)
     label.Text = text
     label.Size = UDim2.new(1, 0, 0, 50)
     label.TextScaled = true
-    applyStyle(label, UILibrary.Styles.Grey)
+    applyStyle(label, Library.Styles.Grey)
     
     return label
 end
 
 -- Create TextBox
-function UILibrary:CreateTextBox(parent, placeholderText)
+function Library:CreateTextBox(parent, placeholderText)
     local textBox = Instance.new("TextBox", parent)
     textBox.PlaceholderText = placeholderText
     textBox.Size = UDim2.new(1, 0, 0, 50)
     textBox.TextScaled = true
-    applyStyle(textBox, UILibrary.Styles.Grey)
+    applyStyle(textBox, Library.Styles.Grey)
     
     return textBox
 end
 
 -- Create DropDown
-function UILibrary:CreateDropDown(parent, options, onSelect)
+function Library:CreateDropDown(parent, options, onSelect)
     local dropDown = Instance.new("Frame", parent)
     dropDown.Size = UDim2.new(1, 0, 0, 50)
     
@@ -118,19 +118,19 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     selectedText.Text = "Select an option"
     selectedText.Size = UDim2.new(1, 0, 1, 0)
     selectedText.TextScaled = true
-    applyStyle(selectedText, UILibrary.Styles.Grey)
+    applyStyle(selectedText, Library.Styles.Grey)
     
     local dropDownButton = Instance.new("TextButton", dropDown)
     dropDownButton.Text = "▼"
     dropDownButton.Size = UDim2.new(0, 30, 1, 0)
     dropDownButton.Position = UDim2.new(1, -30, 0, 0)
-    applyStyle(dropDownButton, UILibrary.Styles.Grey)
+    applyStyle(dropDownButton, Library.Styles.Grey)
     
     local optionFrame = Instance.new("Frame", dropDown)
     optionFrame.Size = UDim2.new(1, 0, 0, #options * 50)
     optionFrame.Position = UDim2.new(0, 0, 1, 0)
     optionFrame.Visible = false
-    applyStyle(optionFrame, UILibrary.Styles.Grey)
+    applyStyle(optionFrame, Library.Styles.Grey)
     
     dropDownButton.MouseButton1Click:Connect(function()
         optionFrame.Visible = not optionFrame.Visible
