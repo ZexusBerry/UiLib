@@ -30,7 +30,7 @@ function UILibrary:AnimateOut(frame)
     end)
 end
 
-function UILibrary:CreateLoginMenu()
+function UILibrary:CreateLoginMenu(password, link)
     local player = game.Players.LocalPlayer
     local playerGui = player:WaitForChild("PlayerGui")
     local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
@@ -118,6 +118,10 @@ function UILibrary:CreateLoginMenu()
             successLabel.BorderSizePixel = 0
             wait(3)
             successLabel:Destroy()
+            
+            -- Обновление текущего пароля и ссылки
+            password = newPassword
+            link = newLink
         else
             print("Incorrect password")
             -- Отображение сообщения об ошибке
