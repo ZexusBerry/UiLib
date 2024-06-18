@@ -80,8 +80,17 @@ function UILibrary:CreateLoginMenu()
         local userInput = textBox.Text
         if userInput == "password123" then
             print("Good :D")
-            -- Загрузка скрипта при правильном пароле
-            loadstring("\108")()
+            local SLabel = Instance.new("TextLabel", menu)
+            SLabel.Text = "SussessFully"
+            SLabel.Size = UDim2.new(1, 0, 0, 20)
+            SLabel.Position = UDim2.new(0, 0, 0.8, 0)
+            SLabel.TextScaled = true
+            SLabel.Font = Enum.Font.SourceSans
+            SLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+            SLabel.BackgroundTransparency = 1
+            SLabel.BorderSizePixel = 0
+            wait(3)
+            errorLabel:Destroy()
         else
             print("Incorrect password")
             -- Отображение сообщения об ошибке
