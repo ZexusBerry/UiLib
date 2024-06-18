@@ -1,4 +1,3 @@
--- UiLib Source.lua
 local UILibrary = {}
 
 UILibrary.Styles = {
@@ -33,15 +32,16 @@ local function applyStyle(uiElement, style)
     if uiElement:IsA("TextButton") or uiElement:IsA("TextLabel") then
         uiElement.TextColor3 = style.TextColor
     end
-    uiElement.Visible = true  -- Убедитесь, что элемент видим
+    uiElement.Visible = true
 end
 
 function UILibrary:CreateMenu(styleName, title)
-    local style = self.Styles[styleName]
+    local style = self.Styles[styleName] or self.Styles.Dark
     local menu = Instance.new("Frame")
     menu.Size = UDim2.new(0, 300, 0, 400)
     menu.Position = UDim2.new(0.5, -150, 0.5, -200)
     menu.AnchorPoint = Vector2.new(0.5, 0.5)
+    menu.BackgroundTransparency = 0
     applyStyle(menu, style)
     
     local titleLabel = Instance.new("TextLabel", menu)
@@ -49,6 +49,7 @@ function UILibrary:CreateMenu(styleName, title)
     titleLabel.Size = UDim2.new(1, 0, 0, 50)
     titleLabel.Position = UDim2.new(0, 0, 0, 0)
     titleLabel.TextScaled = true
+    titleLabel.BackgroundTransparency = 1
     applyStyle(titleLabel, style)
     
     return menu
@@ -56,13 +57,15 @@ end
 
 function UILibrary:CreateTab(menu, title)
     local tab = Instance.new("Frame", menu)
-    tab.Size = UDim2.new(1, 0, 0, 50)
+    tab.Size = UDim2.new(1, 0, 1, -50)
     tab.Position = UDim2.new(0, 0, 0, 50)
+    tab.BackgroundTransparency = 1
     tab.Visible = true
     
-    local tabButton = Instance.new("TextButton", tab)
+    local tabButton = Instance.new("TextButton", menu)
     tabButton.Text = title
-    tabButton.Size = UDim2.new(1, 0, 1, 0)
+    tabButton.Size = UDim2.new(1, 0, 0, 50)
+    tabButton.Position = UDim2.new(0, 0, 0, 0)
     tabButton.TextScaled = true
     applyStyle(tabButton, UILibrary.Styles.Grey)
     
