@@ -206,10 +206,8 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     applyStyle(optionFrame, UILibrary.Styles.Grey, "button")
 
     dropDownButton.MouseButton1Click:Connect(function()
-        optionFrame.Visible = not optionFrame.Visible
-    end)
+        optionFrame.Visible = not optionFrame.Visible    end)
 
-   
     for i, option in ipairs(options) do
         local optionButton = Instance.new("TextButton", optionFrame)
         optionButton.Text = option
