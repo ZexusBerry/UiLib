@@ -85,7 +85,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     end)
     
     local titleLabel = Instance.new("TextLabel", menu)
-    titleLabel.Text = "Login Menu"
+    titleLabel.Text = "Key Menu"
     titleLabel.Size = UDim2.new(1, 0, 0, 30)
     titleLabel.Position = UDim2.new(0, 0, 0, 0)
     titleLabel.TextScaled = true
@@ -95,7 +95,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     titleLabel.BorderSizePixel = 0
     
     local textBox = Instance.new("TextBox", menu)
-    textBox.PlaceholderText = "Enter your password"
+    textBox.PlaceholderText = "Enter Key"
     textBox.Size = UDim2.new(0.8, 0, 0, 30)
     textBox.Position = UDim2.new(0.1, 0, 0.3, 0)
     textBox.TextScaled = true
@@ -106,6 +106,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     textBox.ClearTextOnFocus = false
     textBox.TextWrapped = true
     textBox.TextXAlignment = Enum.TextXAlignment.Left
+    textbox.Text = ""
     
     local enterButton = Instance.new("TextButton", menu)
     enterButton.Text = "Enter"
@@ -138,7 +139,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
             self:AnimateOut(menu)
         else
             local errorLabel = Instance.new("TextLabel", menu)
-            errorLabel.Text = "Incorrect Password"
+            errorLabel.Text = "Invalid Key"
             errorLabel.Size = UDim2.new(1, 0, 0, 20)
             errorLabel.Position = UDim2.new(0, 0, 0.75, 0)
             errorLabel.TextScaled = true
