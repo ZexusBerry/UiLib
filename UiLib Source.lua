@@ -197,7 +197,7 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     dropDownButton.Text = "▼"
     dropDownButton.Size = UDim2.new(0, 30, 1, 0)
     dropDownButton.Position = UDim2.new(1, -30, 0, 0)
-    applyStyle(dropDownButton, UILibrary.Styles.Grey)
+    applyStyle(dropDownButton, UILibrary.Styles.Grey, "button")
 
     local optionFrame = Instance.new("Frame", dropDown)
     optionFrame.Size = UDim2.new(1, 0, 0, #options * 50)
@@ -209,6 +209,7 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
         optionFrame.Visible = not optionFrame.Visible
     end)
 
+   
     for i, option in ipairs(options) do
         local optionButton = Instance.new("TextButton", optionFrame)
         optionButton.Text = option
