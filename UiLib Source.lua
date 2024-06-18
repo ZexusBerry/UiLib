@@ -93,6 +93,7 @@ function UILibrary:CreateMenu(styleName, title)
     menu.Position = UDim2.new(0.5, -200, 0.5, -250)
     menu.AnchorPoint = Vector2.new(0.5, 0.5)
     menu.BackgroundTransparency = 0
+    menu.Visible = true
     applyStyle(menu, style)
 
     local titleLabel = Instance.new("TextLabel", menu)
