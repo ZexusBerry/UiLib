@@ -135,6 +135,34 @@ function UILibrary:CreateLoginMenu()
         end
     end)
     
+    local getKeyButton = Instance.new("TextButton", menu)
+    getKeyButton.Text = "Get Key"
+    getKeyButton.Size = UDim2.new(0.35, 0, 0, 30)
+    getKeyButton.Position = UDim2.new(0.55, 0, 0.5, 0)
+    getKeyButton.TextScaled = true
+    getKeyButton.Font = Enum.Font.SourceSans
+    getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    getKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    getKeyButton.BorderSizePixel = 0
+    getKeyButton.MouseButton1Click:Connect(function()
+        local link = "https://example.com"
+        setclipboard(link)
+        print("Link copied to clipboard:", link)
+        
+        -- Отображение сообщения о копировании
+        local copyLabel = Instance.new("TextLabel", menu)
+        copyLabel.Text = "Link copied!"
+        copyLabel.Size = UDim2.new(1, 0, 0, 20)
+        copyLabel.Position = UDim2.new(0, 0, 0.65, 0)
+        copyLabel.TextScaled = true
+        copyLabel.Font = Enum.Font.SourceSans
+        copyLabel.TextColor3 = Color3.fromRGB(0, 200, 255)
+        copyLabel.BackgroundTransparency = 1
+        copyLabel.BorderSizePixel = 0
+        wait(3)
+        copyLabel:Destroy()
+    end)
+    
     menu.Parent = screenGui
     
     return menu
