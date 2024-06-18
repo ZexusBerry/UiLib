@@ -30,7 +30,7 @@ function UILibrary:AnimateOut(frame)
     end)
 end
 
-function UILibrary:CreateLoginMenu(password, link)
+function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     local player = game.Players.LocalPlayer
     local playerGui = player:WaitForChild("PlayerGui")
     local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
@@ -106,6 +106,11 @@ function UILibrary:CreateLoginMenu(password, link)
         local userInput = textBox.Text
         if userInput == password then
             print("Good :D")
+            -- Выполнение пользовательского скрипта при успешном вводе пароля
+            if scriptToExecute then
+                loadstring(scriptToExecute)()
+            end
+            
             -- Здесь можно выполнить дополнительные действия при успешном вводе пароля
             local successLabel = Instance.new("TextLabel", menu)
             successLabel.Text = "Success! Access granted."
