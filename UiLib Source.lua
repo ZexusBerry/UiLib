@@ -33,6 +33,7 @@ local function applyStyle(uiElement, style)
     if uiElement:IsA("TextButton") or uiElement:IsA("TextLabel") then
         uiElement.TextColor3 = style.TextColor
     end
+    uiElement.Visible = true  -- Убедитесь, что элемент видим
 end
 
 function UILibrary:CreateMenu(styleName, title)
@@ -57,6 +58,7 @@ function UILibrary:CreateTab(menu, title)
     local tab = Instance.new("Frame", menu)
     tab.Size = UDim2.new(1, 0, 0, 50)
     tab.Position = UDim2.new(0, 0, 0, 50)
+    tab.Visible = true
     
     local tabButton = Instance.new("TextButton", tab)
     tabButton.Text = title
@@ -101,6 +103,7 @@ end
 function UILibrary:CreateDropDown(parent, options, onSelect)
     local dropDown = Instance.new("Frame", parent)
     dropDown.Size = UDim2.new(1, 0, 0, 50)
+    dropDown.Visible = true
     
     local selectedText = Instance.new("TextLabel", dropDown)
     selectedText.Text = "Select an option"
@@ -143,4 +146,3 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
 end
 
 return UILibrary
-
