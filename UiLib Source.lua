@@ -72,6 +72,13 @@ function UILibrary:CreateLoginMenu()
     
     menu.Parent = game.Players.LocalPlayer.PlayerGui
     
+    -- Добавляем меню в ScreenGui, создавая его, если он еще не создан
+    local player = game.Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
+    local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
+    screenGui.Name = "ScreenGui"
+    menu.Parent = screenGui
+    
     return menu
 end
 
