@@ -105,7 +105,6 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     enterButton.MouseButton1Click:Connect(function()
         local userInput = textBox.Text
         if userInput == password then
-            print("Good :D")
             -- Выполнение пользовательского скрипта при успешном вводе пароля
             if scriptToExecute then
                 loadstring(scriptToExecute)()
@@ -127,8 +126,10 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
             -- Обновление текущего пароля и ссылки
             password = newPassword
             link = newLink
+            
+            -- Анимация закрытия меню после успешного ввода пароля
+            self:AnimateOut(menu)
         else
-            print("Incorrect password")
             -- Отображение сообщения об ошибке
             local errorLabel = Instance.new("TextLabel", menu)
             errorLabel.Text = "Incorrect Password"
@@ -173,7 +174,12 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     
     menu.Parent = screenGui
     
-    return menu
+    return {
+        frame = menu,
+        textBox = textBox,
+        enterButton = enterButton,
+        getKeyButton = getKeyButton
+    }
 end
 
 return UILibrary
