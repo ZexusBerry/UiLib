@@ -22,7 +22,7 @@ function UILibrary:CreateLoginMenu()
     menu.Size = UDim2.new(0, 300, 0, 200)
     menu.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
     menu.BorderSizePixel = 0
-    menu.Visible = true -- Убедимся, что меню видимо
+    menu.Visible = true
     
     self:AnimateIn(menu)
     
@@ -71,7 +71,6 @@ function UILibrary:CreateLoginMenu()
     end)
     
     menu.Parent = game.Players.LocalPlayer.PlayerGui
-    menu.Position = UDim2.new(0.5, -150, 0.5, -100) -- Устанавливаем начальную позицию
     
     return menu
 end
