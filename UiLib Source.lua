@@ -18,6 +18,11 @@ function UILibrary:AnimateIn(frame)
 end
 
 function UILibrary:CreateLoginMenu()
+    local player = game.Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
+    local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
+    screenGui.Name = "ScreenGui"
+    
     local menu = Instance.new("Frame")
     menu.Size = UDim2.new(0, 300, 0, 200)
     menu.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
@@ -70,13 +75,6 @@ function UILibrary:CreateLoginMenu()
         print("Link copied to clipboard:", link)
     end)
     
-    menu.Parent = game.Players.LocalPlayer.PlayerGui
-    
-    -- Добавляем меню в ScreenGui, создавая его, если он еще не создан
-    local player = game.Players.LocalPlayer
-    local playerGui = player:WaitForChild("PlayerGui")
-    local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
-    screenGui.Name = "ScreenGui"
     menu.Parent = screenGui
     
     return menu
