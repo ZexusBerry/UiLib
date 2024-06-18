@@ -45,7 +45,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     menu.ClipsDescendants = true
     menu.Visible = true
     
-    self:AnimateIn(menu)
+    UILibrary:AnimateIn(menu)
     
     local dragging = false
     local dragStart = nil
@@ -60,7 +60,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     closeBtn.Font = Enum.Font.SourceSansBold
     closeBtn.TextSize = 18
     closeBtn.MouseButton1Click:Connect(function()
-        self:AnimateOut(menu)
+        UILibrary:AnimateOut(menu)
     end)
     
     menu.InputBegan:Connect(function(input)
@@ -106,7 +106,6 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     textBox.ClearTextOnFocus = false
     textBox.TextWrapped = true
     textBox.TextXAlignment = Enum.TextXAlignment.Left
-    textbox.Text = ""
     
     local enterButton = Instance.new("TextButton", menu)
     enterButton.Text = "Enter"
@@ -136,7 +135,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
             wait(3)
             successLabel:Destroy()
             
-            self:AnimateOut(menu)
+            UILibrary:AnimateOut(menu)
         else
             local errorLabel = Instance.new("TextLabel", menu)
             errorLabel.Text = "Invalid Key"
@@ -191,4 +190,3 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
 end
 
 return UILibrary
-
