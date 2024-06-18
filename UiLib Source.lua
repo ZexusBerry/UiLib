@@ -44,7 +44,6 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     menu.BorderSizePixel = 0
     menu.ClipsDescendants = true
     menu.Visible = true
-    menu.BackgroundTransparency = 0.6
     
     self:AnimateIn(menu)
     
