@@ -1,6 +1,6 @@
 local UILibrary = {}
 
--- Define styles
+-- Стили
 UILibrary.Styles = {
     Dark = {
         BackgroundColor = Color3.fromRGB(24, 24, 24),
@@ -36,7 +36,7 @@ UILibrary.Styles = {
     }
 }
 
--- Apply style
+-- Применение стиля к элементу
 local function applyStyle(uiElement, style, styleType)
     if styleType == "button" then
         uiElement.BackgroundColor3 = style.ButtonColor
@@ -53,7 +53,7 @@ local function applyStyle(uiElement, style, styleType)
     uiElement.Visible = true
 end
 
--- Enable dragging
+-- Включение возможности перетаскивания элемента
 local function enableDragging(frame)
     local dragging, dragInput, dragStart, startPos
 
@@ -85,7 +85,7 @@ local function enableDragging(frame)
     end)
 end
 
--- Create menu
+-- Создание меню
 function UILibrary:CreateMenu(styleName, title)
     local style = self.Styles[styleName] or self.Styles.Dark
     local menu = Instance.new("Frame")
@@ -123,7 +123,7 @@ function UILibrary:CreateMenu(styleName, title)
     }
 end
 
--- Create tab
+-- Создание вкладки
 function UILibrary:CreateTab(menuData, title)
     local style = menuData.Style
     local tabButton = Instance.new("TextButton", menuData.Tabs)
@@ -148,7 +148,7 @@ function UILibrary:CreateTab(menuData, title)
     return tabContent
 end
 
--- Create button
+-- Создание кнопки
 function UILibrary:CreateButton(parent, title, onClick)
     local button = Instance.new("TextButton", parent)
     button.Text = title
@@ -160,7 +160,7 @@ function UILibrary:CreateButton(parent, title, onClick)
     return button
 end
 
--- Create label
+-- Создание метки
 function UILibrary:CreateLabel(parent, text)
     local label = Instance.new("TextLabel", parent)
     label.Text = text
@@ -171,7 +171,7 @@ function UILibrary:CreateLabel(parent, text)
     return label
 end
 
--- Create textbox
+-- Создание текстового поля
 function UILibrary:CreateTextBox(parent, placeholderText)
     local textBox = Instance.new("TextBox", parent)
     textBox.PlaceholderText = placeholderText
@@ -182,7 +182,7 @@ function UILibrary:CreateTextBox(parent, placeholderText)
     return textBox
 end
 
--- Create dropdown
+-- Создание выпадающего списка
 function UILibrary:CreateDropDown(parent, options, onSelect)
     local dropDown = Instance.new("Frame", parent)
     dropDown.Size = UDim2.new(1, 0, 0, 50)
@@ -202,11 +202,37 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     local optionFrame = Instance.new("Frame", dropDown)
     optionFrame.Size = UDim2.new(1, 0, 0, #options * 50)
     optionFrame.Position = UDim2.new(0, 0, 1, 0)
+    optionFrame.BackgroundTransparency = 1
     optionFrame.Visible = false
-    applyStyle(optionFrame, UILibrary.Styles.Grey, "button")
 
     dropDownButton.MouseButton1Click:Connect(function()
-        optionFrame.Visible = not optionFrame.Visible    end)
+        optionFrame.Visible = not optionFrame.Visible
+    end)
+
+    local function closeDropDown()
+        optionFrame.Visible = false
+    end
+
+    -- Закрытие выпадающего списка при клике вне его области
+    game:GetService("UserInputService").InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            local isDescendant = false
+            for _, child in ipairs(optionFrame:GetDescendants()) do
+                if child:IsA("GuiObject") and child.Visible and child.AbsolutePosition then
+                    local absolutePos = child.AbsolutePosition
+                    local size = child.AbsoluteSize
+                    if input.Position.X >= absolutePos.X and input.Position.X <= absolutePos.X + size.X and
+                        input.Position.Y >= absolutePos.Y and input.Position.Y <= absolutePos.Y + size.Y then
+                        isDescendant = true
+                        break
+                    end
+                end
+            end
+            if not isDescendant then
+                closeDropDown()
+            end
+        end
+    end)
 
     for i, option in ipairs(options) do
         local optionButton = Instance.new("TextButton", optionFrame)
@@ -218,7 +244,7 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
 
         optionButton.MouseButton1Click:Connect(function()
             selectedText.Text = option
-            optionFrame.Visible = false
+            closeDropDown()
             onSelect(option)
         end)
     end
@@ -226,7 +252,7 @@ function UILibrary:CreateDropDown(parent, options, onSelect)
     return dropDown
 end
 
--- Create checkbox
+-- Создание чекбокса
 function UILibrary:CreateCheckBox(parent, label, onChange)
     local checkBox = Instance.new("TextButton", parent)
     checkBox.AutoButtonColor = false
