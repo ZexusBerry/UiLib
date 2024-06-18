@@ -1,10 +1,6 @@
--- UI Library for Roblox
--- Author: ZexusBerry
--- GitHub: https://github.com/ZexusBerry
-
+-- UiLib Source.lua
 local UILibrary = {}
 
--- Styles4
 UILibrary.Styles = {
     Dark = {
         BackgroundColor = Color3.fromRGB(32, 32, 32),
@@ -32,7 +28,6 @@ UILibrary.Styles = {
     }
 }
 
--- Helper Function to Apply Styles
 local function applyStyle(uiElement, style)
     uiElement.BackgroundColor3 = style.BackgroundColor
     if uiElement:IsA("TextButton") or uiElement:IsA("TextLabel") then
@@ -40,7 +35,6 @@ local function applyStyle(uiElement, style)
     end
 end
 
--- Create Menu
 function UILibrary:CreateMenu(styleName, title)
     local style = self.Styles[styleName]
     local menu = Instance.new("Frame")
@@ -59,7 +53,6 @@ function UILibrary:CreateMenu(styleName, title)
     return menu
 end
 
--- Create Tab
 function UILibrary:CreateTab(menu, title)
     local tab = Instance.new("Frame", menu)
     tab.Size = UDim2.new(1, 0, 0, 50)
@@ -74,7 +67,6 @@ function UILibrary:CreateTab(menu, title)
     return tab
 end
 
--- Create Button
 function UILibrary:CreateButton(parent, title, onClick)
     local button = Instance.new("TextButton", parent)
     button.Text = title
@@ -86,7 +78,6 @@ function UILibrary:CreateButton(parent, title, onClick)
     return button
 end
 
--- Create Label
 function UILibrary:CreateLabel(parent, text)
     local label = Instance.new("TextLabel", parent)
     label.Text = text
@@ -97,7 +88,6 @@ function UILibrary:CreateLabel(parent, text)
     return label
 end
 
--- Create TextBox
 function UILibrary:CreateTextBox(parent, placeholderText)
     local textBox = Instance.new("TextBox", parent)
     textBox.PlaceholderText = placeholderText
@@ -108,7 +98,6 @@ function UILibrary:CreateTextBox(parent, placeholderText)
     return textBox
 end
 
--- Create DropDown
 function UILibrary:CreateDropDown(parent, options, onSelect)
     local dropDown = Instance.new("Frame", parent)
     dropDown.Size = UDim2.new(1, 0, 0, 50)
