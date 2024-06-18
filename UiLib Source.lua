@@ -35,6 +35,7 @@ function UILibrary:CreateLoginMenu(password, link, scriptToExecute)
     local playerGui = player:WaitForChild("PlayerGui")
     local screenGui = playerGui:FindFirstChild("ScreenGui") or Instance.new("ScreenGui", playerGui)
     screenGui.Name = "ScreenGui"
+    screenGui.ResetOnSpawn = false
     
     local menu = Instance.new("Frame")
     menu.Size = UDim2.new(0, 300, 0, 200)
